@@ -1,0 +1,238 @@
+---
+import finance from "../../icons/finance.svg";
+import logoTaller from "../../img/logoTaller.png";
+import linkedin from "../../icons/linkedin.svg";
+import discord from "../../icons/discord.svg";
+import beta from "../../icons/beta.svg";
+
+interface NavItem {
+  name: string;
+  href: string;
+  info: string;
+}
+
+interface Props {
+  navbar: NavItem[];
+}
+
+const { navbar } = Astro.props;
+const currentPath = decodeURIComponent(Astro.url.pathname);
+
+const isLinkActive = (href: string) => {
+  // If href is /#introduction and we are on homepage
+  if (href === "/#introduction" && currentPath === "/") return true;
+  if (href === "#introduction" && currentPath === "/") return true;
+
+  const cleanHref = href.split("#")[0];
+  if (cleanHref === "/") {
+    return currentPath === "/";
+  }
+  const pathWithoutSlash = currentPath.endsWith("/")
+    ? currentPath.slice(0, -1)
+    : currentPath;
+  const hrefWithoutSlash = cleanHref.endsWith("/")
+    ? cleanHref.slice(0, -1)
+    : cleanHref;
+
+  return pathWithoutSlash === hrefWithoutSlash;
+};
+---
+
+<!-- Botón Flotante para móviles y tabletas -->
+<button
+  id="mobile-nav-trigger"
+  class="fixed bottom-6 left-6 z-[9998] xl:hidden flex items-center justify-center gap-2 px-4 py-3 bg-white/95 dark:bg-slate-900/95 border border-slate-200/50 dark:border-slate-800/80 backdrop-blur-md rounded-full shadow-lg text-sm font-semibold text-[--darkblue] dark:text-[--lightblue] transition-all hover:scale-105 active:scale-95 duration-200"
+  aria-label="Abrir índice"
+>
+  <span>Índice</span>
+</button>
+
+<!-- Overlay de fondo -->
+<div
+  id="mobile-nav-overlay"
+  class="fixed inset-0 z-[9999] bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 xl:hidden"
+>
+</div>
+
+<!-- Panel Lateral Desplizable (Drawer) -->
+<nav
+  id="mobile-nav-drawer"
+  class="fixed top-0 left-0 bottom-0 z-[10000] w-[310px] max-w-[85vw] bg-slate-50 dark:bg-slate-950 border-r border-slate-200/80 dark:border-slate-800/80 shadow-2xl flex flex-col -translate-x-full transition-transform duration-300 ease-out xl:hidden"
+  aria-label="Índice de contenido para móviles"
+>
+  <!-- Cabecera del Panel -->
+  <div
+    class="flex items-center justify-between p-5 border-b border-slate-100 dark:border-slate-800/60 flex-shrink-0"
+  >
+    <div class="flex items-center gap-2 relative">
+      <img
+        src={beta.src}
+        class="absolute -top-3 -right-6 w-8 h-8 opacity-75"
+        alt=""
+      />
+      <img src={finance.src} class="w-8 h-8 object-contain" alt="Logo" />
+      <span
+        class="font-bold text-slate-800 dark:text-slate-100 tracking-tight ml-2"
+        >Temario</span
+      >
+    </div>
+    <button
+      id="mobile-nav-close"
+      class="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition"
+      aria-label="Cerrar índice"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="w-5 h-5"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Cuerpo del Panel (Lista de capítulos) -->
+  <div
+    class="flex-1 overflow-y-auto px-4 py-3 space-y-1.5 scrollbar-none"
+    id="mobile-nav-list"
+  >
+    {
+      navbar.map(({ name, href }) => {
+        const active = isLinkActive(href);
+        return (
+          <a
+            href={href}
+            class={`w-full block py-3.5 px-4 rounded-xl text-start text-[14px] leading-tight font-medium transition-all duration-200 ${
+              active
+                ? "bg-[--lightblue]/25 dark:bg-[--darkblue]/20 border-l-4 border-[--darkblue] dark:border-[--lightblue] text-[--darkblue] dark:text-[--lightblue] font-bold"
+                : "text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900/50 hover:text-[--darkblue] dark:hover:text-[--lightblue]"
+            }`}
+          >
+            {name}
+          </a>
+        );
+      })
+    }
+  </div>
+
+  <!-- Pie de página del Panel (Sponsors y Redes) -->
+  <div
+    class="p-5 border-t border-slate-200/60 dark:border-slate-800/60 space-y-4 flex-shrink-0 bg-slate-100/30 dark:bg-slate-900/10"
+  >
+    <div class="grid grid-cols-2 gap-2">
+      <a
+        href="https://bullmarketbrokers.com/funds/main/chooseyourfund"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-1.5 rounded-lg bg-[--lightblue]/20 px-3 py-2 text-[--darkblue] dark:text-[--lightblue] transition-colors duration-200 hover:bg-[--darkblue] hover:text-white dark:hover:bg-[--lightblue] dark:hover:text-[--darkblue] font-bold text-xs"
+      >
+        <img src={linkedin.src} alt="" class="w-4 h-4 opacity-60" />
+        LinkedIn
+      </a>
+      <a
+        href="https://discord.gg/MrQdmzd"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-1.5 rounded-lg bg-[--lightblue]/20 px-3 py-2 text-[--darkblue] dark:text-[--lightblue] transition-colors duration-200 hover:bg-[--darkblue] hover:text-white dark:hover:bg-[--lightblue] dark:hover:text-[--darkblue] font-bold text-xs"
+      >
+        <img src={discord.src} alt="" class="w-4 h-4 opacity-60" />
+        Discord
+      </a>
+    </div>
+
+    <div class="text-center pt-1">
+      <a
+        href="https://home.tallerdeinversiones.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex flex-col items-center gap-1 scale-90"
+      >
+        <span
+          class="text-[10px] text-gray-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors"
+        >
+          sponsored by
+        </span>
+        <img
+          src={logoTaller.src}
+          alt="Taller de inversiones"
+          class="h-[1.75rem] w-auto object-contain grayscale opacity-80 dark:invert dark:opacity-60"
+        />
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+  (() => {
+    const setupMobileNav = () => {
+      const trigger = document.querySelector("#mobile-nav-trigger");
+      const drawer = document.querySelector("#mobile-nav-drawer");
+      const overlay = document.querySelector("#mobile-nav-overlay");
+      const closeBtn = document.querySelector("#mobile-nav-close");
+
+      if (!trigger || !drawer || !overlay || !closeBtn) return;
+
+      const openDrawer = () => {
+        drawer.classList.remove("-translate-x-full");
+        overlay.classList.remove("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "hidden"; // Block body scroll
+      };
+
+      const closeDrawer = () => {
+        drawer.classList.add("-translate-x-full");
+        overlay.classList.add("opacity-0", "pointer-events-none");
+        document.body.style.overflow = ""; // Restore body scroll
+      };
+
+      // Avoid duplicates: check data-has-listener attribute
+      if (!trigger.dataset.hasListener) {
+        trigger.dataset.hasListener = "true";
+        trigger.addEventListener("click", openDrawer);
+      }
+      if (!closeBtn.dataset.hasListener) {
+        closeBtn.dataset.hasListener = "true";
+        closeBtn.addEventListener("click", closeDrawer);
+      }
+      if (!overlay.dataset.hasListener) {
+        overlay.dataset.hasListener = "true";
+        overlay.addEventListener("click", closeDrawer);
+      }
+
+      // Close drawer on links click
+      const drawerLinks = drawer.querySelectorAll("a");
+      drawerLinks.forEach((link) => {
+        if (link.dataset.hasListener) return;
+        link.dataset.hasListener = "true";
+        link.addEventListener("click", () => {
+          closeDrawer();
+        });
+      });
+    };
+
+    // Run immediately and on view transition navigation
+    setupMobileNav();
+    document.addEventListener("astro:page-load", setupMobileNav);
+  })();
+</script>
+
+<style>
+  /* Custom scrollbar hiding helper */
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Cubic bezier transition for drawer */
+  #mobile-nav-drawer {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+</style>

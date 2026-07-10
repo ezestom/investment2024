@@ -1,31 +1,48 @@
 ---
 import Layout from "@layouts/Layout.astro";
-interface TooltiProps {
+interface TooltipProps {
 	name: string;
 	href: string;
 	info: string;
 }
 const { href, name, info } = Astro.props;
+
+const currentPath = decodeURIComponent(Astro.url.pathname);
+
+const isActive = (() => {
+	if (href === "/#introduction" && currentPath === "/") return true;
+	if (href === "#introduction" && currentPath === "/") return true;
+
+	const cleanHref = href.split('#')[0];
+	if (cleanHref === "/") {
+		return currentPath === "/";
+	}
+	const pathWithoutSlash = currentPath.endsWith('/') ? currentPath.slice(0, -1) : currentPath;
+	const hrefWithoutSlash = cleanHref.endsWith('/') ? cleanHref.slice(0, -1) : cleanHref;
+
+	return pathWithoutSlash === hrefWithoutSlash;
+})();
 ---
 
 <a class="anchor-container hover:opacity-100 group" href={href}>
 	<div
-		class="hint"
-		data-position="4"
-		class="whitespace-nowrap text-start w-fit text-base group opacity-75 hover:opacity-100 transition">
+		class="hint whitespace-nowrap text-start w-fit text-base group transition"
+		data-position="4">
 		<p
-			class="anchor-name pl-4 tracking-tight font-normal whitespace-nowrap m-0">
-			<span class="opacity-0 group-hover:opacity-100 absolute left-0">
+			class={`anchor-name pl-4 tracking-tight whitespace-nowrap m-0 transition-all duration-200 ${isActive ? "active-anchor" : ""}`}>
+			<span class={`absolute left-0 transition-opacity duration-200 ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
 				#
 			</span>
 			{name}
 		</p>
 
-		<div class="content">
-			<p class="m-0 text-pretty !text-[--darkblue]">
-				{info.split("•").join("\n")}
-			</p>
-		</div>
+		{info && info !== "empty" && (
+			<div class="content">
+				<p class="m-0 text-pretty !text-[--darkblue]">
+					{info.split("•").join("\n")}
+				</p>
+			</div>
+		)}
 	</div>
 </a>
 
@@ -41,11 +58,34 @@ const { href, name, info } = Astro.props;
 		position: relative;
 		width: fit-content;
 	}
+	
 	.anchor-container .anchor-name {
+		color: #475569; /* Slate 600 - High contrast gray for light mode sidebar */
 		opacity: 0.75;
+		transition: all 0.2s ease-in-out;
 	}
+	
+	html.dark .anchor-container .anchor-name {
+		color: #cbd5e1; /* Slate 300 - High contrast gray for dark mode sidebar */
+	}
+	
 	.anchor-container .anchor-name:hover {
+		color: var(--darkblue);
 		opacity: 1;
+	}
+	
+	html.dark .anchor-container .anchor-name:hover {
+		color: var(--lightblue);
+	}
+
+	.anchor-container .anchor-name.active-anchor {
+		color: var(--darkblue);
+		font-weight: 700;
+		opacity: 1;
+	}
+	
+	html.dark .anchor-container .anchor-name.active-anchor {
+		color: var(--lightblue);
 	}
 
 	.anchor-container .hint[data-position="1"] .content {

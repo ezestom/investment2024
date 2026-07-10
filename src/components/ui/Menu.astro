@@ -1,96 +1,93 @@
 ---
-import open from "../../icons/openNav.svg";
-import close from "../../icons/closeNav.svg";
 import ThemeIcon from "../ThemeIcon.astro";
-import coffeeEmpty from "../../icons/coffeeEmpty.svg";
-import coffeeFull from "../../icons/coffeeFull.svg";
-import githubBlue from "../../icons/githubBlue.svg";
-import githubBlack from "../../icons/githubBlack.svg";
 import { Form } from "../Form/Form.jsx";
 ---
 
 <div
-	class="mx-auto right-6 top-6 fixed z-50 text-[--darkblue] hidden md:block"
+	class="mx-auto right-6 top-6 fixed z-50 text-slate-700 dark:text-slate-200"
 	id="menu-btn">
 	<div
-		class="size-9 bg-[--lightblue] transition-all rounded-md group text-[--darkblue]">
-		<label for="nav-toggle" class="cursor-pointer group">
-			<input
-				type="checkbox"
-				id="nav-toggle"
-				class="cursor-pointer hidden"
-			/>
-			<img
-				src={open.src}
-				alt="Open menu"
+		class="size-10 relative flex items-center justify-center bg-white/90 dark:bg-slate-900/90 border border-slate-200/50 dark:border-slate-800/80 transition-all rounded-xl shadow-sm hover:shadow-md hover:bg-slate-50 dark:hover:bg-slate-800 text-[--darkblue] dark:text-[--lightblue] group">
+		<input
+			type="checkbox"
+			id="nav-toggle"
+			class="cursor-pointer hidden"
+		/>
+		<label for="nav-toggle" class="cursor-pointer w-full h-full flex items-center justify-center relative">
+			<!-- SVG Hamburguesa (Abrir) -->
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 16 11"
 				id="open"
-				class="transition-all absolute group-hover:scale-105 group-active:scale-90"
-			/>
-			<img
-				src={close.src}
-				alt="Close menu"
+				class="w-5 h-4 transition-all absolute group-hover:scale-105 group-active:scale-95 fill-current"
+			>
+				<path d="M12.5 3h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5m0 3h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5m0 3h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5"/>
+			</svg>
+			<!-- SVG Cruz (Cerrar) -->
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
 				id="close"
-				class="transition-all absolute group-hover:scale-105 group-active:scale-90 scale-100 opacity-0"
-			/>
+				class="w-5 h-5 transition-all absolute group-hover:scale-105 group-active:scale-95 scale-100 opacity-0 fill-current"
+			>
+				<path d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/>
+			</svg>
 		</label>
 	</div>
 	<nav
 		id="menu"
-		class="bg-[--lightblue] dark:bg-[#1a1f26] dark:border dark:border-gray-800 rounded-md p-4 rounded-tr-none transition-transform duration-300 menu-closed absolute top-8 right-0 min-w-[245px] w-full z-40 shadow-md">
-		<ul class="flex flex-col justify-center items-start w-full h-full">
-			<li class="transition-colors group w-full flex items-center m-0">
+		class="bg-white/90 dark:bg-slate-900/90 border border-slate-200/50 dark:border-slate-800/80 backdrop-blur-md rounded-2xl p-2 transition-all duration-300 menu-closed absolute top-11 right-0 min-w-[245px] z-40 shadow-xl">
+		<ul class="flex flex-col gap-1 justify-center items-start w-full h-full p-0 m-0 list-none">
+			<li class="w-full flex items-center p-0 m-0">
 				<ThemeIcon transition:persist />
 			</li>
-			<li class="m-0 flex items-start w-full">
+			<li class="w-full flex items-center p-0 m-0">
 				<a
 					href="https://github.com/ezestom/aprenderainvertir"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="transition-colors group w-full flex gap-2 hover:bg-[--darkblue] py-2 px-3 rounded-md">
-					<span class="group-hover:scale-105 transition duration-300">
-						<img
-							src={coffeeFull.src}
-							alt=""
-							class="absolute w-5 opacity-0 group-hover:opacity-100 transition duration-300 drop-shadow-md"
-						/>
-						<img
-							src={coffeeEmpty.src}
-							alt=""
-							class="w-5 group-hover:scale-110 opacity-100 transition duration-300 drop-shadow-md"
-						/>
+					class="transition-colors group w-full flex items-center gap-3 hover:bg-[--darkblue] dark:hover:bg-[--darkblue]/80 text-slate-700 dark:text-slate-200 hover:text-white dark:hover:text-white py-2.5 px-3.5 rounded-xl font-semibold text-sm">
+					<span class="relative w-5 h-5 flex items-center justify-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 256 256"
+							class="w-5 h-5 transition duration-300 group-hover:scale-110 opacity-100 group-hover:opacity-0 absolute fill-current"
+						>
+							<g fill="currentColor">
+								<path d="M208 88v48a88 88 0 0 1-51.3 80H83.3A88 88 0 0 1 32 136V88Z" opacity=".2"/>
+								<path d="M80 56V24a8 8 0 0 1 16 0v32a8 8 0 0 1-16 0m40 8a8 8 0 0 0 8-8V24a8 8 0 0 0-16 0v32a8 8 0 0 0 8 8m32 0a8 8 0 0 0 8-8V24a8 8 0 0 0-16 0v32a8 8 0 0 0 8 8m96 56v8a40 40 0 0 1-37.51 39.91a96.6 96.6 0 0 1-27 40.09H208a8 8 0 0 1 0 16H32a8 8 0 0 1 0-16h24.54A96.3 96.3 0 0 1 24 136V88a8 8 0 0 1 8-8h176a40 40 0 0 1 40 40m-48-24H40v40a80.27 80.27 0 0 0 45.12 72h69.76A80.27 80.27 0 0 0 200 136Zm32 24a24 24 0 0 0-16-22.62V136a96 96 0 0 1-1.2 15a24 24 0 0 0 17.2-23Z"/>
+							</g>
+						</svg>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 256 256"
+							class="w-5 h-5 transition duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 absolute fill-current"
+						>
+							<path fill="currentColor" d="M208 80H32a8 8 0 0 0-8 8v48a96.3 96.3 0 0 0 32.54 72H32a8 8 0 0 0 0 16h176a8 8 0 0 0 0-16h-24.54a96.6 96.6 0 0 0 27-40.09A40 40 0 0 0 248 128v-8a40 40 0 0 0-40-40m24 48a24 24 0 0 1-17.2 23a96 96 0 0 0 1.2-15V97.38A24 24 0 0 1 232 120ZM112 56V24a8 8 0 0 1 16 0v32a8 8 0 0 1-16 0m32 0V24a8 8 0 0 1 16 0v32a8 8 0 0 1-16 0m-64 0V24a8 8 0 0 1 16 0v32a8 8 0 0 1-16 0"/>
+						</svg>
 					</span>
-					<span
-						class="whitespace-nowrap font-semibold transition-colors text-sm group-hover:text-[--lightblue] w-full"
-						>Invitar un Cafecito</span
-					>
+					<span class="whitespace-nowrap transition-colors text-sm">Invitar un Cafecito</span>
 				</a>
 			</li>
-			<li class="m-0 flex items-start w-full">
+			<li class="w-full flex items-center p-0 m-0">
 				<a
 					href="https://github.com/ezestom/aprenderainvertir"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="transition-colors group w-full flex gap-2 hover:bg-[--darkblue] py-2 px-3 rounded-md">
-					<span
-						class="group-hover:scale-105 transition duration-300 gap-2 group-hover:drop-shadow-md">
-						<img
-							src={githubBlack.src}
-							alt=""
-							class="absolute w-5 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all"
-						/>
-						<img
-							src={githubBlue.src}
-							alt=""
-							class="w-5 group-hover:scale-105 opacity-100 group-hover:opacity-0 transition-all"
-						/>
+					class="transition-colors group w-full flex items-center gap-3 hover:bg-[--darkblue] dark:hover:bg-[--darkblue]/80 text-slate-700 dark:text-slate-200 hover:text-white dark:hover:text-white py-2.5 px-3.5 rounded-xl font-semibold text-sm">
+					<span class="w-5 h-5 flex items-center justify-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 16 16"
+							class="w-5 h-5 transition-transform duration-300 group-hover:scale-110 fill-current"
+						>
+							<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59c.4.07.55-.17.55-.38c0-.19-.01-.82-.01-1.49c-2.01.37-2.53-.49-2.69-.94c-.09-.23-.48-.94-.82-1.13c-.28-.15-.68-.52-.01-.53c.63-.01 1.08.58 1.23.82c.72 1.21 1.87.87 2.33.66c.07-.52.28-.87.51-1.07c-1.78-.2-3.64-.89-3.64-3.95c0-.87.31-1.59.82-2.15c-.08-.2-.36-1.02.08-2.12c0 0 .67-.21 2.2.82c.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82c.44 1.1.16 1.92.08 2.12c.51.56.82 1.27.82 2.15c0 3.07-1.87 3.75-3.65 3.95c.29.25.54.73.54 1.48c0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
+						</svg>
 					</span>
-					<span
-						class="whitespace-nowrap font-semibold transition-colors text-sm group-hover:text-[--lightblue]"
-						>Contribuir al Proyecto</span
-					>
+					<span class="whitespace-nowrap transition-colors text-sm">Contribuir al Proyecto</span>
 				</a>
 			</li>
-			<li class="m-0 flex items-start w-full">
+			<li class="w-full flex items-start p-0 m-0">
 				<Form client:load />
 			</li>
 		</ul>
@@ -98,55 +95,94 @@ import { Form } from "../Form/Form.jsx";
 </div>
 
 <script is:inline>
-	const setupMenuToggle = () => {
-		const navToggle = document.querySelector("#nav-toggle");
-		const menu = document.querySelector("#menu");
-		const openIcon = document.querySelector("#open");
-		const closeIcon = document.querySelector("#close");
+	(() => {
+		const setupMenuToggle = () => {
+			const navToggle = document.querySelector("#nav-toggle");
+			const menu = document.querySelector("#menu");
+			const openIcon = document.querySelector("#open");
+			const closeIcon = document.querySelector("#close");
 
-		const toggleMenu = () => {
-			if (navToggle && menu && openIcon && closeIcon) {
-				if (navToggle.checked) {
-					menu.classList.remove("menu-closed");
-					menu.classList.add("menu-open");
-					openIcon.style.opacity = "0";
-					closeIcon.style.opacity = "1";
-				} else {
-					menu.classList.remove("menu-open");
-					menu.classList.add("menu-closed");
-					openIcon.style.opacity = "1";
-					closeIcon.style.opacity = "0";
+			// Asegurar estado inicial cerrado
+			if (navToggle) {
+				navToggle.checked = false;
+			}
+			if (menu && openIcon && closeIcon) {
+				menu.classList.remove("menu-open");
+				menu.classList.add("menu-closed");
+				openIcon.style.opacity = "1";
+				closeIcon.style.opacity = "0";
+			}
+
+			const toggleMenu = () => {
+				if (navToggle && menu && openIcon && closeIcon) {
+					if (navToggle.checked) {
+						menu.classList.remove("menu-closed");
+						menu.classList.add("menu-open");
+						openIcon.style.opacity = "0";
+						closeIcon.style.opacity = "1";
+					} else {
+						menu.classList.remove("menu-open");
+						menu.classList.add("menu-closed");
+						openIcon.style.opacity = "1";
+						closeIcon.style.opacity = "0";
+					}
 				}
+			};
+
+			if (navToggle && !navToggle.dataset.hasListener) {
+				navToggle.dataset.hasListener = "true";
+				navToggle.addEventListener("change", toggleMenu);
+			}
+
+			// Cerrar al hacer clic fuera del menú
+			if (window._menuOutsideClickHandler) {
+				document.removeEventListener("click", window._menuOutsideClickHandler);
+			}
+			
+			window._menuOutsideClickHandler = (event) => {
+				const menuBtn = document.querySelector("#menu-btn");
+				if (menuBtn && !menuBtn.contains(event.target) && navToggle && navToggle.checked) {
+					navToggle.checked = false;
+					toggleMenu();
+				}
+			};
+
+			document.addEventListener("click", window._menuOutsideClickHandler);
+
+			// Cerrar al hacer clic en enlaces del menú
+			if (menu) {
+				const menuLinks = menu.querySelectorAll("a, button");
+				menuLinks.forEach((link) => {
+					link.addEventListener("click", () => {
+						if (navToggle && navToggle.checked) {
+							navToggle.checked = false;
+							toggleMenu();
+						}
+					});
+				});
 			}
 		};
 
-		if (navToggle && !navToggle.dataset.hasListener) {
-			navToggle.dataset.hasListener = "true";
-			navToggle.addEventListener("change", toggleMenu);
-		}
-	};
+		// Ejecutar inmediatamente en carga inicial
+		setupMenuToggle();
 
-	// Ejecutar inmediatamente en carga inicial
-	setupMenuToggle();
-
-	// Ejecutar tras transiciones de Astro
-	document.addEventListener("astro:page-load", setupMenuToggle);
+		// Ejecutar tras transiciones de Astro
+		document.addEventListener("astro:page-load", setupMenuToggle);
+	})();
 </script>
 
 <style>
 	.menu-open {
-		transform: translateY(0);
+		transform: scale(1) translateY(0);
 		opacity: 1;
-		transition: all 0.3s ease-in-out;
+		transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease-out;
 		pointer-events: all;
 	}
 
 	.menu-closed {
-		transform: translateY(
-			-20px
-		); /* Ajusta el valor según tus necesidades */
+		transform: scale(0.95) translateY(-10px);
 		opacity: 0;
-		transition: all 0.3s ease-in-out;
+		transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.10s ease-in;
 		pointer-events: none;
 	}
 </style>

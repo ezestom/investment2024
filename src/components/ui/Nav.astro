@@ -6,6 +6,8 @@ import linkedin from "../../icons/linkedin.svg";
 import discord from "../../icons/discord.svg";
 import beta from "../../icons/beta.svg";
 
+import MobileNav from "./MobileNav.astro";
+
 export const NAVBAR = [
 	{
 		name: "Introducción",
@@ -43,7 +45,7 @@ export const NAVBAR = [
 		info: "✓ Acciones\n✓ CEDEARs\n✓ ETFs\n✓ Fondos Comunes de Inversión (FCI)\n✓ Bonos\n✓ Títulos Públicos\n✓ Opciones Negociables\n✓ Letras del Tesoro (LETES)\n✓ Cauciones Bursátiles\n✓ Opciones\n✓ Futuros Financieros\n✓ Cheques Diferidos\n✓ Fideicomisos Financieros",
 	},
 	{
-		name: "Fondo Común de Inversión",
+		name: "Fondo Común de Inversion",
 		href: "/fondo-común-de-inversion",
 		info: "✓ Características Principales\n✓ Tipos de FCI\n✓ Características del FCI de Liquidez\n✓ Inversión en Fondos de Liquidez\n✓ Ventajas\n✓ Ejemplo Práctico\n✓ Conclusión",
 	},
@@ -74,6 +76,8 @@ export const NAVBAR = [
 	},
 ];
 ---
+
+<MobileNav navbar={NAVBAR} />
 
 <nav
 		transition:persist

@@ -40,10 +40,12 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://www.aprenderainvertir.
 		<meta name="twitter:image" content="/finance.svg" />
 		
 		<script is:inline>
-			const savedTheme = localStorage.getItem("theme");
-			const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-			const isDark = savedTheme === "dark" || (!savedTheme && prefersDarkScheme);
-			document.documentElement.classList.toggle("dark", isDark);
+			(() => {
+				const savedTheme = localStorage.getItem("theme");
+				const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+				const isDark = savedTheme === "dark" || (!savedTheme && prefersDarkScheme);
+				document.documentElement.classList.toggle("dark", isDark);
+			})();
 		</script>
 
 		<script is:inline type="application/ld+json">

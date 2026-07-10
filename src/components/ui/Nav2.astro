@@ -6,6 +6,8 @@ import linkedin from "../../icons/linkedin.svg";
 import discord from "../../icons/discord.svg";
 import beta from "../../icons/beta.svg";
 
+import MobileNav from "./MobileNav.astro";
+
 export const NAVBAR = [
 	{
 		name: "Introducción",
@@ -74,6 +76,8 @@ export const NAVBAR = [
 	},
 ];
 ---
+
+<MobileNav navbar={NAVBAR} />
 
 <nav
 		transition:persist

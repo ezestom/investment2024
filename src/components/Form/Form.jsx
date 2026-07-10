@@ -5,8 +5,6 @@ import x from "../../icons/x.svg";
 import "./Form.css";
 import logo from "../../icons/finance.svg";
 import finance from "../../img/form.png";
-import pencilEmpty from "../../icons/pencilEmpty.svg";
-import pencilFull from "../../icons/pencilFull.svg";
 
 export function Form() {
 	const [dialog, setDialog] = useState(false);
@@ -103,22 +101,30 @@ export function Form() {
 			<div className="flex w-full items-start justify-start">
 				<button
 					onClick={openDialog}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="transition-colors group flex w-full gap-2 hover:bg-[--darkblue] py-2 px-3 rounded-md text-[--darkblue] dark:text-white">
-					<span className="group-hover:scale-105 transition duration-300 gap-2 group-hover:drop-shadow-md w-fit">
-						<img
-							src={pencilFull.src}
-							alt=""
-							className="absolute w-5 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all"
-						/>
-						<img
-							src={pencilEmpty.src}
-							alt=""
-							className="w-5 group-hover:scale-105 opacity-100 group-hover:opacity-0 transition-all"
-						/>
+					className="transition-colors group flex w-full items-center gap-3 hover:bg-[--darkblue] dark:hover:bg-[--darkblue]/80 text-slate-700 dark:text-slate-200 hover:text-white dark:hover:text-white py-2.5 px-3.5 rounded-xl font-semibold text-sm">
+					<span className="relative w-5 h-5 flex items-center justify-center">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 48 48"
+							className="w-5 h-5 transition duration-300 group-hover:scale-110 opacity-100 group-hover:opacity-0 absolute fill-none stroke-current"
+							strokeWidth="4"
+							strokeLinejoin="round"
+						>
+							<path d="M5.325 43.5h8.485l31.113-31.113l-8.486-8.485L5.325 35.015z"/>
+							<path strokeLinecap="round" d="m27.952 12.387l8.485 8.485"/>
+						</svg>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 48 48"
+							className="w-5 h-5 transition duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 absolute fill-current stroke-current"
+							strokeWidth="4"
+							strokeLinejoin="round"
+						>
+							<path d="M5.325 43.5h8.485l31.113-31.113l-8.486-8.485L5.325 35.015z" />
+							<path strokeLinecap="round" d="m27.952 12.387l8.485 8.485" />
+						</svg>
 					</span>
-					<span className="whitespace-nowrap w-fit font-semibold transition-colors text-sm group-hover:text-[--lightblue]">
+					<span className="whitespace-nowrap transition-colors">
 						Enviar mensaje
 					</span>
 				</button>
